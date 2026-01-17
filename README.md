@@ -1,2 +1,2 @@
-# usdjpy-mlops
-Automatically Collecting and Processing Daily USD/JPY Data
+# Minimal ML Ops Project: Automatically Collecting and Processing Daily USD/JPY Data
+This project implements a minimal yet practical ML Ops pipeline that automatically collects, processes, and analyzes daily USD/JPY exchange rate data. It demonstrates the core components of ML Ops — data ingestion, preprocessing, analysis, automation, and reproducibility — using lightweight tools such as Python and GitHub Actions.
