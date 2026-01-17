@@ -10,3 +10,29 @@ The goal is to build a fully automated data pipeline that:
 * Executes automatically every day via GitHub Actions
 * Produces clean data that can be visualized later (e.g., in a Kaggle Notebook)
 This project is intentionally minimal, focusing on reliability and automation rather than complex modeling.
+
+# Pipeline Architecture
+GitHub Actions (daily scheduled run)
+        ↓
+fetch.py      – Collect USD/JPY data from a public API
+process.py    – Clean and preprocess the data
+analyze.py    – Compute indicators and simple signals
+        ↓
+data/usdjpy.csv – Persist processed data
+        ↓
+Visualization (Note this can be implemnted exernally. e.g. Kaggle Notebook)
+
+# Project Structure
+
+```
+usdjpy-mlops/
+├── fetch.py          # Data ingestion
+├── process.py        # Preprocessing and feature engineering
+├── analyze.py        # Lightweight analysis logic
+├── data/
+│   └── usdjpy.csv    # Persisted dataset
+├── .github/
+│   └── workflows/
+│       └── pipeline.yml   # GitHub Actions automation
+└── README.md
+```
