@@ -25,4 +25,8 @@ jobs:
         run: python fetch.py
         env:
           EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+
+      - name: Tail USDJPY
+        run: tail -10 data/usdjpy.csv
+        shell: bash
           
