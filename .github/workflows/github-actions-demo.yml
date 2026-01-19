@@ -1,0 +1,32 @@
+name: USDJPY Pipeline
+
+on:
+  schedule:
+    - cron: "0 9 * * *" 
+  workflow_dispatch:
+  
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: 'pip' # Enable caching for pip dependencies
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch USDJPY
+        run: python fetch.py
+        env:
+          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+
+      - name: Tail USDJPY
+        run: tail -10 data/usdjpy.csv
+        shell: bash
+          
