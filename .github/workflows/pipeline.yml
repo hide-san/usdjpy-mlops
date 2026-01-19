@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-#      - name: Fetch USDJPY
-#        run: python fetch.py
-#        env:
-#          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+      - name: Fetch USDJPY
+        run: python fetch.py
+        env:
+          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
 
       - name: Tail USDJPY
         run: tail -10 data/usdjpy.csv
