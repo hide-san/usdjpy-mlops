@@ -1,6 +1,5 @@
 import requests
 import pandas as pd
-from datetime import datetime
 import os
 
 API_KEY = os.getenv("EXCHANGE_API_KEY")
