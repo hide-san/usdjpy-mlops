@@ -26,13 +26,16 @@ jobs:
         env:
           EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
 
-      - name: Tail USDJPY
-        run: tail -10 data/usdjpy.csv
-        shell: bash
+      - name: Process data
+        run: python process.py
+
+      - name: Analyze data
+        run: python analyze.py
 
       - name: Commit updated data
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+          git diff
           git commit -m "Update data" || echo "No changes"
           git push
