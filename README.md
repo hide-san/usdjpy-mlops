@@ -81,5 +81,7 @@ on:
   Public foreign exchange rates API used for fetching USD/JPY. Check usage limits and terms before commercial use. **Last checked: 2026-01-19.**
 - **Kaggle Notebook** — https://www.kaggle.com/code/hideos/minimal-ml-ops-project-daily-usd-jpy-processing  
   Interactive notebook for visualization and exploration of the collected USD/JPY data.
+- **GitHub Repository** — https://github.com/hide-san/usdjpy-mlops/  
+  Public repository containing the automated daily USD/JPY data pipeline.
 > **Note:** This repository does not contain any API keys. API keys (if required) are stored securely in GitHub Actions Secrets and are never committed to the repo.
 
