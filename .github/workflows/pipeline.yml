@@ -9,9 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: ./.github/actions/python-setup
       - name: Buid Code
-        run: |
-          echo "Nothing to build for this Python project."
+        run: echo "Nothing to build for this Python project."
 
   test:
     runs-on: ubuntu-latest
@@ -19,8 +19,7 @@ jobs:
     steps:
       - uses: ./.github/actions/python-setup
       - name: Execute Unit Test
-        run: |
-          echo "Place code to run tests here"
+        run:  echo "Place code to run tests here"
 
   run:
     runs-on: ubuntu-latest
