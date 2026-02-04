@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/python-setup
       - name: Buid Code
         run: echo "Nothing to build for this Python project."
