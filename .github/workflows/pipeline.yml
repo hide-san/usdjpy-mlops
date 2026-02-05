@@ -29,10 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/python-setup
-#      - name: 'Fetch USD/JPY'
-#        run: python fetch.py
-#        env:
-#          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+      - name: 'Fetch USD/JPY'
+        run: python fetch.py
+        env:
+          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
 
       - name: Process data
         run: python process.py
