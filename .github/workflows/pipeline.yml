@@ -1,27 +1,35 @@
-name: USDJPY Pipeline
+name: 'USD/JPY Pipeline'
 
 on:
   schedule:
-    - cron: "0 9 * * *" 
+    - cron: "0 9 * * *"
   workflow_dispatch:
-  
+
 jobs:
-  run-pipeline:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/python-setup
+      - name: Buid Code
+        run: echo "Nothing to build for this Python project."
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-          cache: 'pip' # Enable caching for pip dependencies
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/python-setup
+      - name: Execute Unit Test
+        run:  echo "Place code to run tests here"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Fetch USDJPY
+  run:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/python-setup
+      - name: 'Fetch USD/JPY'
         run: python fetch.py
         env:
           EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
@@ -32,22 +40,29 @@ jobs:
       - name: Analyze data
         run: python analyze.py
 
-      - name: Commit updated data
+      - name: Commit updated dataset
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add data/usdjpy.csv
           git commit -m "Update data" || echo "No changes"
           git push
-         
+
+
+  kagggle:
+    runs-on: ubuntu-latest
+    needs: run
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/python-setup
       - name: Install Kaggle API
         run: pip install kaggle
-
+        
       - name: Push notebook to Kaggle
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
           KAGGLE_DIR: $HOME/kaggle
         run: |
-           mkdir -p ${{ env.KAGGLE_DIR }}
-           kaggle kernels pull  minimal-ml-ops-project-daily-usd-jpy-processing -p ${{ env.KAGGLE_DIR }} -m
-           kaggle kernels push -p ${{ env.KAGGLE_DIR }}
+          mkdir -p ${{ env.KAGGLE_DIR }}
+          kaggle kernels pull  minimal-ml-ops-project-daily-usd-jpy-processing -p ${{ env.KAGGLE_DIR }} -m
+          kaggle kernels push -p ${{ env.KAGGLE_DIR }}
