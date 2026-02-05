@@ -1,5 +1,7 @@
 {
-  "title": "USDJPY Daily Dataset",
+  "title": "Daily USDJPY Dataset",
+  "subtitle": "Daily‑updated USD/JPY exchange rate dataset",
+  "description": "Daily‑updated USD/JPY exchange rate dataset generated automatically by a GitHub Actions pipeline. The dataset is refreshed every day with the latest available rate and basic indicators.",
   "id": "hideos/daily-usdjpy-dataset",
   "licenses": [
     {
