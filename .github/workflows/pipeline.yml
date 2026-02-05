@@ -58,4 +58,4 @@ jobs:
           KAGGLE_DIR: $HOME/kaggle
         run: |
           mkdir -p ${{ env.KAGGLE_DIR }}
-          kaggle datasets version daily-usdjpy-dataset -p ${{ env.KAGGLE_DIR }}/data -m "Update dataset"
+          kaggle datasets version -p ${{ env.KAGGLE_DIR }}/data -m "Update dataset"
