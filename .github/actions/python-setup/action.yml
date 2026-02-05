@@ -1,5 +1,5 @@
 name: "Python Setup"
-description: "Checkout, install Python, install dependencies"
+description: "Python Setup, install dependencies"
 
 runs:
   using: "composite"
