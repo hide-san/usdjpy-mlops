@@ -29,10 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/python-setup
-      - name: 'Fetch USD/JPY'
-        run: python fetch.py
-        env:
-          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
+#      - name: 'Fetch USD/JPY'
+#        run: python fetch.py
+#        env:
+#          EXCHANGE_API_KEY: ${{ secrets.EXCHANGE_API_KEY }}
 
       - name: Process data
         run: python process.py
@@ -40,10 +40,13 @@ jobs:
       - name: Analyze data
         run: python analyze.py
 
-      - name: Commit updated dataset
-        run: ./scripts/commit_data.sh
+      - name: Upload dataset artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dataset
+          path: data/
 
-  kagggle:
+  kaggle:
     runs-on: ubuntu-latest
     needs: run
     steps:
@@ -51,8 +54,14 @@ jobs:
       - uses: ./.github/actions/python-setup
       - name: Install Kaggle API
         run: pip install kaggle
+
+      - name: Download dataset artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dataset
+          path: ./dataset
         
       - name: Push dataset to Kaggle
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
-        run: kaggle datasets version -p ./data -m "Update dataset" --dir-mode zip
+        run: kaggle datasets version -p ./dataset -m "Update dataset" --dir-mode zip
