@@ -52,11 +52,10 @@ jobs:
       - name: Install Kaggle API
         run: pip install kaggle
         
-      - name: Push notebook to Kaggle
+      - name: Push dataset to Kaggle
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
           KAGGLE_DIR: $HOME/kaggle
         run: |
           mkdir -p ${{ env.KAGGLE_DIR }}
-          kaggle kernels pull  minimal-ml-ops-project-daily-usd-jpy-processing -p ${{ env.KAGGLE_DIR }} -m
-          kaggle kernels push -p ${{ env.KAGGLE_DIR }}
+          kaggle datasets version daily-usdjpy-dataset -p ${{ env.KAGGLE_DIR }}/data -m "Update dataset"
