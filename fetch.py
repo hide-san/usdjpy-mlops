@@ -1,12 +1,26 @@
-import requests
 from datetime import datetime, timedelta
 import os
+import requests
 import pandas as pd
 
 API_KEY = os.getenv("EXCHANGE_API_KEY")
 MAX_DATE_WINDOW=365
 
 def get_dates():
+    """
+    Determine the start and end dates for the API request window.
+
+    This function reads the existing `data/usdjpy.csv` file and extracts the
+    most recent date recorded. It then computes an end date by adding
+    `MAX_DATE_WINDOW` days to that date.
+
+    Returns
+    -------
+    tuple[str, str]
+        A tuple containing:
+        - start_date (str): The latest date found in the CSV (YYYY-MM-DD).
+        - end_date (str): The computed end date (YYYY-MM-DD).
+    """
     df = pd.read_csv("data/usdjpy.csv")
     start = df['date'].max()
     date_format = "%Y-%m-%d"
@@ -27,6 +41,24 @@ API_URL = (
 
 
 def fetch_usdjpy():
+    """
+    Fetch USD/JPY exchange rate data and append it to the local CSV file.
+
+    This function calls the exchangerate.host API using the global `API_URL`,
+    parses the returned JSON, and converts the `quotes` field into a DataFrame.
+    The resulting data is merged with any existing `data/usdjpy.csv` file,
+    ensuring no duplicate dates are stored.
+
+    Side Effects
+    ------------
+    - Creates the `data/` directory if it does not exist.
+    - Writes or updates `data/usdjpy.csv`.
+
+    Notes
+    -----
+    - Existing rows are preserved; new rows are appended.
+    - Duplicate dates are removed based on the `date` column.
+    """
     r = requests.get(API_URL)
     data = r.json()
     rows = [{"date": d, "usdjpy": v.get("USDJPY")} for d, v in data["quotes"].items()]
