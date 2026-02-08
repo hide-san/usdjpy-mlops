@@ -20,7 +20,8 @@ import requests
 import pandas as pd
 
 API_KEY = os.getenv("EXCHANGE_API_KEY")
-MAX_DATE_WINDOW=365
+MAX_DATE_WINDOW = 365
+
 
 def get_dates():
     """
