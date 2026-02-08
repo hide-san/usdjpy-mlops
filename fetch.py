@@ -1,8 +1,7 @@
 import requests
-import pandas as pd
-import json
 from datetime import datetime, timedelta
 import os
+import pandas as pd
 
 API_KEY = os.getenv("EXCHANGE_API_KEY")
 MAX_DATE_WINDOW=365
@@ -17,7 +16,14 @@ def get_dates():
 
 
 start_date, end_date = get_dates()
-API_URL = f"https://api.exchangerate.host/timeframe?access_key={API_KEY}&source=USD&currencies=JPY&start_date={start_date}&end_date={end_date}"
+API_URL = (
+    f"https://api.exchangerate.host/timeframe?"
+    f"access_key={API_KEY}&"
+    f"source=USD&"
+    f"currencies=JPY&"
+    f"start_date={start_date}&"
+    f"end_date={end_date}"
+)
 
 
 def fetch_usdjpy():
