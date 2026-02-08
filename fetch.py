@@ -75,7 +75,7 @@ def fetch_usdjpy():
     - Existing rows are preserved; new rows are appended.
     - Duplicate dates are removed based on the `date` column.
     """
-    r = requests.get(API_URL)
+    r = requests.get(API_URL, timeout=10)
     data = r.json()
     rows = [{"date": d, "usdjpy": v.get("USDJPY")} for d, v in data["quotes"].items()]
     df = pd.DataFrame(rows)
