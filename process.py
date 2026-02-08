@@ -1,3 +1,21 @@
+"""
+Annotate the USD/JPY dataset with spike and trend indicators.
+
+This module loads `data/usdjpy.csv`, computes two derived features:
+
+1. Spike Detection
+   Flags rows where the absolute percentage change (`pct_change`)
+   exceeds 1%. A boolean column `spike` is added.
+
+2. Trend Classification
+   Compares short-term (ma5) and medium-term (ma25) moving averages.
+   - "up"   : ma5 > ma25
+   - "down" : otherwise
+   A categorical column `trend` is added.
+
+The updated dataset overwrites the original CSV file.
+"""
+
 import pandas as pd
 
 df = pd.read_csv("data/usdjpy.csv")
