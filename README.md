@@ -1,5 +1,5 @@
+# Minimal ML Ops Project: Automatically Collecting and Processing Daily USD/JPY Data  
 [![Pylint](https://github.com/hide-san/usdjpy-mlops/actions/workflows/pylint.yml/badge.svg)](https://github.com/hide-san/usdjpy-mlops/actions/workflows/pylint.yml)
-# Minimal ML Ops Project: Automatically Collecting and Processing Daily USD/JPY Data
 
 This project implements a minimal yet practical ML Ops pipeline that automatically collects, processes, and publishes daily USD/JPY exchange rate data.  
 It demonstrates the core components of ML Ops — data ingestion, preprocessing, automation, reproducibility, and external visualization — using lightweight tools such as Python, GitHub Actions, and Kaggle.
