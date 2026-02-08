@@ -1,3 +1,19 @@
+"""
+Fetch USD/JPY exchange rate data from the exchangerate.host API and
+append it to the local dataset.
+
+This module determines the appropriate date window based on the most
+recent entry in `data/usdjpy.csv`, queries the API for historical
+USD/JPY rates, normalizes the response into tabular form, and merges
+the new data with the existing CSV while preventing duplicate dates.
+
+Side Effects
+------------
+- Creates the `data/` directory if it does not exist.
+- Reads and writes `data/usdjpy.csv`.
+- Extends the dataset with newly fetched exchange rate records.
+"""
+
 from datetime import datetime, timedelta
 import os
 import requests
