@@ -1,3 +1,4 @@
+[![Pylint](https://github.com/hide-san/usdjpy-mlops/actions/workflows/pylint.yml/badge.svg)](https://github.com/hide-san/usdjpy-mlops/actions/workflows/pylint.yml)
 # Minimal ML Ops Project: Automatically Collecting and Processing Daily USD/JPY Data
 
 This project implements a minimal yet practical ML Ops pipeline that automatically collects, processes, and publishes daily USD/JPY exchange rate data.  
